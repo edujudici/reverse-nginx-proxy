@@ -5,8 +5,8 @@ docker-compose down
 filelist=""
 
 for d in ../sites/*/ ; do
-    echo Including $d"docker-compose.yml"
-    n="-f ${d}docker-compose.yml"
+    echo Including $d"docker-compose-production.yml"
+    n="-f ${d}docker-compose-production.yml"
     filelist="${filelist}$n "
 done
 
