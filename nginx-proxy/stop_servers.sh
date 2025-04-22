@@ -5,10 +5,15 @@ docker-compose down
 filelist=""
 
 for d in ../sites/*/ ; do
-    echo Including $d"current/docker-compose-production.yml"
-    n="-f ${d}current/docker-compose-production.yml"
-    filelist="${filelist}$n "
+    current_dir=$(find "$d" -maxdepth 1 -type d -name '*-current')
+    if [ -n "$current_dir" ]; then
+        compose_file="${current_dir}/docker-compose-production.yml"
+
+        echo Including $compose_file
+        n="-f ${compose_file}"
+        filelist="${filelist}$n "
+    fi
 done
 
-docker-compose ${filelist} down
+docker compose ${filelist} down
 
