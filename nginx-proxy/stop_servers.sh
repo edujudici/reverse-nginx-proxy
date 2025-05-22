@@ -1,6 +1,6 @@
 #!/bin/bash
 logger Stopping docker webserver cluster
-docker-compose down
+docker compose down
 
 filelist=""
 envfiles=()
