@@ -58,7 +58,7 @@ services:
       - dhparam:/etc/nginx/dhparam
       - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     networks:
       - default
     restart: always
