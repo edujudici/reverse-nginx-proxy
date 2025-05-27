@@ -56,6 +56,7 @@ services:
       - conf:/etc/nginx/conf.d
       - vhost:/etc/nginx/vhost.d
       - dhparam:/etc/nginx/dhparam
+      - html:/usr/share/nginx/html
       - certs:/etc/nginx/certs:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
     networks:
@@ -65,17 +66,22 @@ services:
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: nginx-proxy-le
-    volumes_from:
-      - nginx-proxy
     volumes:
-      - certs:/etc/nginx/certs:rw
-      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - dhparam:/etc/nginx/dhparam
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - default
     restart: always
 
 volumes:
   conf:
   vhost:
   dhparam:
+  html:
   certs:
 
 # Do not forget to 'docker network create nginx-proxy' before launch, and to add '--network nginx-proxy' to proxied containers.
